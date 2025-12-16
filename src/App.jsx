@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React ,{ useState } from 'react'
+import { FiMenu, FiX } from "react-icons/fi"; // Hamburger & close icons
 // Place your PDF in /public so Vite serves it at the site root
 const resumeUrl = 'https://res.cloudinary.com/dn4jqqjvo/image/upload/v1765872530/Raja-Abdulrehman_macndj.pdf'
 const profileImage =
@@ -108,42 +108,62 @@ const services = [
 
 
 export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900">
       <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-6 lg:gap-16 lg:px-0">
-        <header className="card sticky top-4 z-20 flex items-center justify-between gap-4 px-5 py-3">
-          <div className="flex items-center gap-3">
-          <img
-       src={profileImage}
-       alt="Raja AbdulRehman headshot"
-       className="h-16 w-16 rounded-2xl object-cover"
-     />
-            <div>
-              <div className="text-sm font-semibold text-slate-900">Raja AbdulRehman</div>
-              <div className="text-xs font-medium text-slate-500">Junior MERN Developer</div>
-            </div>
-          </div>
-          <nav className="hidden items-center gap-3 text-sm font-semibold text-slate-600 sm:flex">
-            <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#projects">
-              Projects
-            </a>
-            <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#about">
-              About
-            </a>
-            <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#services">
-              Services
-            </a>
-            <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#contact">
-              Contact
-            </a>
-          </nav>
-          <a
-            className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-[1px] hover:shadow-md"
-            href="#contact"
-          >
+      <header className="card sticky top-4 z-20 flex items-center justify-between gap-4 px-5 py-3 bg-white shadow-sm">
+      {/* Left: profile */}
+      <div className="flex items-center gap-3">
+        <img
+          src={profileImage}
+          alt="Raja AbdulRehman headshot"
+          className="h-16 w-16 rounded-2xl object-cover"
+        />
+        <div>
+          <div className="text-sm font-semibold text-slate-900">Raja AbdulRehman</div>
+          <div className="text-xs font-medium text-slate-500">Junior MERN Developer</div>
+        </div>
+      </div>
+
+      {/* Desktop nav */}
+      <nav className="hidden sm:flex items-center gap-3 text-sm font-semibold text-slate-600">
+        <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#projects">Projects</a>
+        <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#about">About</a>
+        <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#services">Services</a>
+        <a className="rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#contact">Contact</a>
+      </nav>
+
+      {/* Book a call button */}
+      <a
+        className="hidden sm:inline-block rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-[1px] hover:shadow-md"
+        href="#contact"
+      >
+        Book a call
+      </a>
+
+      {/* Mobile menu button */}
+      <button
+        className="sm:hidden text-slate-700 text-2xl"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <FiX /> : <FiMenu />}
+      </button>
+
+      {/* Mobile dropdown menu */}
+      {isOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start p-5 gap-2 sm:hidden">
+          <a className="w-full rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#projects" onClick={() => setIsOpen(false)}>Projects</a>
+          <a className="w-full rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#about" onClick={() => setIsOpen(false)}>About</a>
+          <a className="w-full rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#services" onClick={() => setIsOpen(false)}>Services</a>
+          <a className="w-full rounded-lg px-3 py-2 hover:bg-blue-50 hover:text-blue-700" href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
+          <a className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-[1px] hover:shadow-md" href="#contact" onClick={() => setIsOpen(false)}>
             Book a call
           </a>
-        </header>
+        </div>
+      )}
+    </header>
 
         <section className="card grid gap-8 p-7 lg:grid-cols-[1.2fr,0.8fr]" id="home">
   <div className="flex flex-col gap-5">
@@ -370,12 +390,12 @@ export default function App() {
                 <div className="text-sm font-semibold text-slate-900">rbg.raja123@gmail.com</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Location</div>
-                <div className="text-sm font-semibold text-slate-900">Remote · Open to travel</div>
+                <div className="text-xs uppercase tracking-wide text-slate-500">Phone Number</div>
+                <div className="text-sm font-semibold text-slate-900">03373157398</div>
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wide text-slate-500">Availability</div>
-                <div className="text-sm font-semibold text-slate-900">Starting January 2026</div>
+                <div className="text-xs uppercase tracking-wide text-slate-500">Location</div>
+                <div className="text-sm font-semibold text-slate-900">Remote · Open to travel</div>
               </div>
             </div>
           </div>
