@@ -1,4 +1,4 @@
-import React ,{ useState } from 'react'
+import React ,{ useState, useEffect } from 'react'
 import { FiMenu, FiX } from "react-icons/fi"; // Hamburger & close icons
 // Place your PDF in /public so Vite serves it at the site root
 const resumeUrl = 'https://res.cloudinary.com/dn4jqqjvo/image/upload/v1765872530/Raja-Abdulrehman_macndj.pdf'
@@ -110,10 +110,24 @@ const services = [
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900">
       <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-6 lg:gap-16 lg:px-0">
-      <header className="card sticky top-4 z-20 flex items-center justify-between gap-4 px-5 py-3 bg-white shadow-sm">
+      <header   className={`card sticky top-4 z-20 flex items-center justify-between gap-4 px-5 py-3 transition-colors duration-300 ${
+     isScrolled ? "bg-transparent" : "bg-white shadow-sm"
+  }`}
+>
       {/* Left: profile */}
       <div className="flex items-center gap-3">
         <img
@@ -231,7 +245,7 @@ export default function App() {
 
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
       <strong className="text-sm text-slate-900">What I do</strong>
-      <p className="mt-2 text-sm text-slate-600">
+      <p id="about" className="mt-2 text-sm text-slate-600">
         Build responsive frontends, develop backend APIs, and deliver complete MERN applications with clean architecture and maintainable code.
       </p>
     </div>
@@ -239,7 +253,7 @@ export default function App() {
 </section>
 
 
-        <section className="card grid gap-6 p-7 md:grid-cols-2" id="about">
+        <section className="card grid gap-6 p-7 md:grid-cols-2 items-start" >
   <div className="flex flex-col gap-4">
     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
       About
@@ -263,6 +277,10 @@ export default function App() {
   </div>
 
   <div className="grid gap-3">
+  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
+      Experince
+    </p>
+
     {experiences.map((exp) => (
       <article
         key={exp.company}
@@ -309,7 +327,7 @@ export default function App() {
                 <h3 className="text-base font-semibold text-slate-900">{skill.title}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {skill.items.map((item) => (
-                    <span key={item} className="pill">
+                    <span  key={item} className="pill">
                       {item}
                     </span>
                   ))}
@@ -317,9 +335,10 @@ export default function App() {
               </div>
             ))}
           </div>
+          <p id="projects"></p>
         </section>
 
-        <section className="card p-7" id="projects">
+        <section className="card p-7" >
           <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Selected Work</p>
@@ -358,9 +377,9 @@ export default function App() {
               </article>
             ))}
           </div>
-        </section>
+          <p id="services"></p> </section>
 
-        <section className="card p-7" id="services">
+        <section className="card p-7" >
           <div className="mb-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Services</p>
             <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Ways I can help</h2>
@@ -386,7 +405,7 @@ export default function App() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Contact</p>
             <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Let&apos;s build something impactful.</h2>
             <p className="text-sm text-slate-600">
-              Drop your real details here: email. I respond within one business day.
+            Feel free to reach out using the contact details below. I respond within one business day.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               <div>
@@ -417,7 +436,7 @@ export default function App() {
     <div className="text-slate-500">Junior MERN Developer · Portfolio Starter</div>
   </div>
   <div className="flex gap-3 font-semibold text-slate-700">
-    <span>Email: raja.abdulrehman@example.com</span>
+    <span>Email: rbg.raja123@gmail.com</span>
     <span>Number: 03373157398</span>
   </div>
 </footer>
