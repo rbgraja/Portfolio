@@ -198,7 +198,7 @@ export default function App() {
     <div className="grid gap-3 sm:grid-cols-3">
       {[
         { value: '5+', label: 'MERN projects completed' },
-        { value: '2 yrs', label: 'Experience in web development' },
+        { value: '4 yrs', label: 'Experience in web development' },
         { value: '100%', label: 'Committed to learning & growth' },
       ].map((item) => (
         <div key={item.label} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
