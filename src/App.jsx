@@ -295,7 +295,9 @@ export default function App() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Skills</p>
               <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Core capabilities</h2>
-              <p className="text-sm text-slate-600">Swap these lists with your own stack, tools, and workflows.</p>
+              <p className="text-sm text-slate-600">
+  These are the technologies, tools, and workflows I use to build and manage my projects.
+</p>
             </div>
             <a className="text-sm font-semibold text-blue-700" href="#contact">
               Let&apos;s work together →
@@ -362,7 +364,9 @@ export default function App() {
           <div className="mb-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Services</p>
             <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Ways I can help</h2>
-            <p className="text-sm text-slate-600">Plug in your own offerings, deliverables, or engagement models.</p>
+            <p className="text-sm text-slate-600">
+  Here you can explore the services, projects, and solutions I provide.
+</p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {services.map((service) => (
