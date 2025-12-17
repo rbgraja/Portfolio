@@ -263,7 +263,7 @@ export default function App() {
     </div>
 
     <div className="flex flex-wrap gap-2">
-      {['React', 'Node.js', 'MongoDB', 'Tailwind CSS','CSS','JavaScript','HTML','PHP','MYSQL','BOOTSTRAP'].map((pill) => (
+      {['React', 'Node.js','Express.js', 'MongoDB', 'Tailwind CSS','CSS','JavaScript','HTML','PHP','MYSQL','BOOTSTRAP'].map((pill) => (
         <span key={pill} className="pill">
           {pill}
         </span>
