@@ -13,6 +13,34 @@ const projects = [
     link: 'https://rabbit-dja4.vercel.app/',
     image: 'https://rabbit-dja4.vercel.app/assets/rabbit-hero-DBA8qmWF.webp',
   },
+   {
+    title: 'Ladylike Dresses',
+    summary: 'A modern fashion-focused frontend website designed to showcase women’s dresses with an elegant and visually engaging UI.',
+    tech: [
+      'Next.js',
+      'Tailwind CSS',
+      'SEO Optimization',
+      'Responsive Design',
+      'Vercel'
+    ],
+    link: 'https://ladydresses.vercel.app/',
+    image: 'https://ladydresses.vercel.app/banner.webp',
+  },
+  {
+    title: 'R&S Movers',
+    summary: 'A professional movers and logistics website presenting services, locations, and contact information clearly.',
+    tech: [
+      'Next.js',
+      'Tailwind CSS',
+      'Form Handling',
+      'Responsive Design',
+      'Vercel'
+    ],
+    link: 'https://rsmovers.vercel.app/',
+    image: 'https://nayakam.com/wp-content/uploads/2020/09/Packers-and-movers.jpg',
+  },
+
+
 
 ]
 
@@ -343,7 +371,8 @@ export default function App() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Selected Work</p>
               <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Project highlights</h2>
-              Explore my personal projects below. Each includes live links and a brief overview of the features and functionalities I implemented.
+              Explore some of my projects below. Each includes live links and a brief overview of the features and functionalities I implemented.
+
             </div>
             <a className="text-sm font-semibold text-blue-700" href="#contact">
               Request a walkthrough →
