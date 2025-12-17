@@ -19,7 +19,6 @@ const projects = [
     tech: [
       'Next.js',
       'Tailwind CSS',
-      'SEO Optimization',
       'Responsive Design',
       'Vercel'
     ],
