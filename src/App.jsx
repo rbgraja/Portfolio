@@ -72,7 +72,6 @@ const skills = [
     title: 'Cloud & Deployment',
     items: [
       'Vercel',
-      'Netlify',
       'Cloudinary',
       'Basic Deployment & Environment Setup'
     ]
