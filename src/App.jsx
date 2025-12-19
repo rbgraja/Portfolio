@@ -461,7 +461,7 @@ export default function App() {
         <footer className="mb-6 flex flex-col items-start justify-between gap-3 text-sm text-slate-500 sm:flex-row">
   <div>
     <div className="font-semibold text-slate-800">Raja AbdulRehman</div>
-    <div className="text-slate-500">Junior MERN Developer · Portfolio Starter</div>
+    <div className="text-slate-500">Junior MERN Stack Developer | Growing in MERN</div>
   </div>
   <div className="flex gap-3 font-semibold text-slate-700">
     <span>Email: rbg.raja123@gmail.com</span>
