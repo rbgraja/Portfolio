@@ -25,19 +25,7 @@ const projects = [
     link: 'https://ladydresses.vercel.app/',
     image: 'https://ladydresses.vercel.app/banner.webp',
   },
-  {
-    title: 'R&S Movers',
-    summary: 'A professional movers and logistics website presenting services, locations, and contact information clearly.',
-    tech: [
-      'Next.js',
-      'Tailwind CSS',
-      'Form Handling',
-      'Responsive Design',
-      'Vercel'
-    ],
-    link: 'https://rsmovers.vercel.app/',
-    image: 'https://nayakam.com/wp-content/uploads/2020/09/Packers-and-movers.jpg',
-  },
+
 
 
 
