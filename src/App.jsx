@@ -25,7 +25,19 @@ const projects = [
     link: 'https://ladydresses.vercel.app/',
     image: 'https://ladydresses.vercel.app/banner.webp',
   },
-
+   {
+    title: 'HEY CHAT Demo',
+    summary: 'This frontend assessment project is a clean and responsive web application built with React and Tailwind CSS. It features a modern UI, smooth navigation, and interactive components. The application also includes a chat system interface, demonstrating real-time style messaging UI. Overall, it showcases strong frontend skills and a well-structured design approach.',
+    tech: [
+      'React js',
+      'Tailwind CSS',
+      'Responsive Design',
+      'Vercel',
+      'json dummy api'
+    ],
+    link: 'https://raja-abdulrehman-frontendassesment.vercel.app/',
+    image: 'https://raja-abdulrehman-frontendassesment.vercel.app/dashboard.PNG',
+  },
 
 
 
