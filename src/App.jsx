@@ -81,19 +81,21 @@ export default function App() {
       {/* vignette */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_50%_50%,rgba(0,0,0,0)_38%,rgba(0,0,0,0.6)_100%)]" />
 
-      <div className="absolute top-[5vh] left-1/2 -translate-x-1/2 z-[6] font-['Space_Grotesk'] font-medium text-[13px] tracking-[0.3em] uppercase text-white/55">
-        Raja · Portfolio
-      </div>
+      <div className="absolute top-0 inset-x-0 z-[6] flex items-center justify-between gap-3 px-[5vw] py-[3.5vh]">
+        <div className="font-['Space_Grotesk'] font-medium text-[10px] sm:text-[13px] tracking-[0.15em] sm:tracking-[0.3em] uppercase text-white/55 whitespace-nowrap">
+          Raja · Portfolio
+        </div>
 
-      <a
-        className="absolute top-[5vh] right-[6vw] z-[6] font-['Inter'] font-medium text-[13px] tracking-wide text-[#0c0d10] bg-[#e8b563] border border-[#e8b563] px-5 py-2.5 rounded-full no-underline transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,181,99,0.35)]"
-        href={CV_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        download
-      >
-        Download CV
-      </a>
+        <a
+          className="font-['Inter'] font-medium text-[11px] sm:text-[13px] tracking-wide text-[#0c0d10] bg-[#e8b563] border border-[#e8b563] px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full no-underline whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,181,99,0.35)]"
+          href={CV_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+        >
+          Download CV
+        </a>
+      </div>
 
       <div className="relative z-[5] w-full h-full flex items-center justify-center text-center px-[6vw]">
         <Scene active={current === 0}>
