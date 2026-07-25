@@ -87,7 +87,7 @@ export default function App() {
         </div>
 
         <a
-          className="font-['Inter'] font-medium text-[11px] sm:text-[13px] tracking-wide text-[#0c0d10] bg-blue-600 border bg-blue-600 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full no-underline whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,181,99,0.35)]"
+          className="font-['Inter'] font-medium text-[11px] sm:text-[13px] tracking-wide text-white bg-blue-600 border border-blue-600 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full no-underline whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,181,99,0.35)]"
           href={CV_URL}
           target="_blank"
           rel="noopener noreferrer"
