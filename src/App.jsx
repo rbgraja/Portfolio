@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import "./Intro.css";
 
 const SKILLS = [
+  "HTML",
+  "CSS",
+  "BOOTSTRAP",
+  "JQUERY",
   "React.js",
   "Next.js",
   "PostgreSql",
