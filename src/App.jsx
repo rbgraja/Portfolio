@@ -28,6 +28,21 @@ const PROJECTS = [
     description: "E-commerce / store app",
     url: "https://rabbit-dja4.vercel.app/",
   },
+  {
+   name:"Resure",
+   description: "E-commerce / Gym & Fitness app",
+   url: "https://e-store-gym.vercel.app/",
+  },
+  {
+    name: "XTech",
+    description: "E-commerce / store app",
+    url: "https://xtech-ecommerse.vercel.app/",
+  },
+  {
+    name: "CMS",
+    description: "DEMO CMS",
+    url: "https://cms-for-demo.vercel.app/",
+  }
 ];
 
 const CV_URL =
