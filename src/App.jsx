@@ -75,7 +75,7 @@ const PARTICLES = [
 ];
 
 const CV_URL =
-  "https://res.cloudinary.com/dn4jqqjvo/image/upload/v1784967232/Raja-Abdulrehman-CV_agdmvv.pdf";
+  "https://res.cloudinary.com/dn4jqqjvo/image/upload/v1787209231/Raja-Abdulrehman-CV_jyooxn.pdf";
 
 const SCENE_DURATION = 4200;
 const MANUAL_VIEW_DURATION = 10000;
