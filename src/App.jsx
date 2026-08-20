@@ -45,22 +45,60 @@ const PROJECTS = [
   }
 ];
 
+const EXPERIENCE = [
+  {
+    role: "Senior Full Stack Developer",
+    company: "Tech Direct Support",
+    current: true,
+    description:
+      "Client handling, development, and QA — owning features end-to-end across the stack.",
+  },
+  {
+    role: "Front-End Developer",
+    company: "Live Greeter, Lahore",
+    description:
+      "Building responsive, accessible UI and integrating REST APIs alongside designers and backend engineers.",
+  },
+];
+
+const PARTICLES = [
+  { left: "8%", top: "70%", size: 3, duration: 16, delay: 0 },
+  { left: "18%", top: "30%", size: 2, duration: 20, delay: 2 },
+  { left: "28%", top: "85%", size: 4, duration: 14, delay: 4 },
+  { left: "40%", top: "15%", size: 2, duration: 22, delay: 1 },
+  { left: "55%", top: "60%", size: 3, duration: 18, delay: 6 },
+  { left: "65%", top: "25%", size: 2, duration: 24, delay: 3 },
+  { left: "78%", top: "75%", size: 3, duration: 15, delay: 5 },
+  { left: "88%", top: "40%", size: 2, duration: 19, delay: 7 },
+  { left: "50%", top: "90%", size: 2, duration: 21, delay: 8 },
+  { left: "95%", top: "15%", size: 3, duration: 17, delay: 2.5 },
+];
+
 const CV_URL =
   "https://res.cloudinary.com/dn4jqqjvo/image/upload/v1784967232/Raja-Abdulrehman-CV_agdmvv.pdf";
 
 const SCENE_DURATION = 4200;
+const MANUAL_VIEW_DURATION = 10000;
 
 export default function App() {
   const [current, setCurrent] = useState(0);
   const sceneCount = 7;
   const timerRef = useRef(null);
+  const manualRef = useRef(false);
 
   useEffect(() => {
-    timerRef.current = setInterval(() => {
+    const duration = manualRef.current ? MANUAL_VIEW_DURATION : SCENE_DURATION;
+    manualRef.current = false;
+    timerRef.current = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % sceneCount);
-    }, SCENE_DURATION);
-    return () => clearInterval(timerRef.current);
-  }, []);
+    }, duration);
+    return () => clearTimeout(timerRef.current);
+  }, [current]);
+
+  const goToSlide = (i) => {
+    manualRef.current = true;
+    setCurrent(i);
+  };
 
   return (
     <div className="relative w-full h-screen min-h-screen overflow-hidden font-['Inter'] bg-[radial-gradient(ellipse_at_50%_25%,#171a1f_0%,#0c0d10_50%,#050506_100%)]">
@@ -82,6 +120,28 @@ export default function App() {
         <div className="absolute -top-[20%] w-[14vw] h-[140%] left-[12%] origin-top rotate-[8deg] bg-[linear-gradient(180deg,rgba(232,181,99,0.14),rgba(232,181,99,0)_75%)] animate-[sway_14s_ease-in-out_infinite]" />
         <div className="absolute -top-[20%] w-[14vw] h-[140%] left-[45%] origin-top -rotate-[6deg] bg-[linear-gradient(180deg,rgba(232,181,99,0.14),rgba(232,181,99,0)_75%)] animate-[sway_14s_ease-in-out_infinite] [animation-delay:3s]" />
         <div className="absolute -top-[20%] w-[14vw] h-[140%] left-[72%] origin-top rotate-[10deg] bg-[linear-gradient(180deg,rgba(232,181,99,0.14),rgba(232,181,99,0)_75%)] animate-[sway_14s_ease-in-out_infinite] [animation-delay:6s]" />
+      </div>
+
+      {/* floating embers */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className="absolute rounded-full bg-[#e8b563]"
+            style={{
+              left: p.left,
+              top: p.top,
+              width: p.size,
+              height: p.size,
+              boxShadow: "0 0 6px 1px rgba(232,181,99,0.55)",
+              animationName: "floatParticle, twinkle",
+              animationDuration: `${p.duration}s, ${p.duration * 0.55}s`,
+              animationTimingFunction: "ease-in-out, ease-in-out",
+              animationIterationCount: "infinite, infinite",
+              animationDelay: `${p.delay}s, ${p.delay}s`,
+            }}
+          />
+        ))}
       </div>
 
       {/* film grain */}
@@ -186,12 +246,21 @@ export default function App() {
           <div className="font-['Inter'] font-medium text-[15px] tracking-[0.35em] uppercase text-[#e8b563] mb-6 opacity-90">
             Experience
           </div>
-          <div className="font-['Space_Grotesk'] font-bold text-[clamp(26px,4vw,44px)] leading-[1.05] text-[#f3efe7] tracking-tight">
-            Front-End Developer
-          </div>
-          <div className="font-['Inter'] text-[clamp(15px,1.7vw,20px)] text-[#c7cbd3] max-w-[44ch] leading-[1.75] mt-4">
-            Live Greeter, Lahore — building responsive, accessible UI and
-            integrating REST APIs alongside designers and backend engineers.
+          <div className="flex flex-col gap-7 max-w-[560px]">
+            {EXPERIENCE.map((exp) => (
+              <div key={exp.role}>
+                <div className="font-['Space_Grotesk'] font-bold text-[clamp(22px,3.2vw,36px)] leading-[1.1] text-[#f3efe7] tracking-tight">
+                  {exp.role}
+                </div>
+                <div className="font-['Inter'] font-medium text-[12px] tracking-[0.2em] uppercase text-[#e8b563]/80 mt-1.5">
+                  {exp.company}
+                  {exp.current ? " · Current" : ""}
+                </div>
+                <div className="font-['Inter'] text-[clamp(14px,1.5vw,18px)] text-[#c7cbd3] max-w-[44ch] mx-auto leading-[1.7] mt-3">
+                  {exp.description}
+                </div>
+              </div>
+            ))}
           </div>
         </Scene>
 
@@ -243,7 +312,7 @@ export default function App() {
             className={`w-2 h-2 rounded-full border-none p-0 cursor-pointer transition-all duration-300 ${
               i === current ? "bg-[#e8b563] scale-[1.4]" : "bg-white/[0.18]"
             }`}
-            onClick={() => setCurrent(i)}
+            onClick={() => goToSlide(i)}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

@@ -38,3 +38,5 @@
 @keyframes sway { 0%, 100% { transform: rotate(8deg) translateX(0); opacity: 0.35; } 50% { transform: rotate(4deg) translateX(2vw); opacity: 0.65; } }
 @keyframes fogMove { 0% { transform: translateX(-10%); } 100% { transform: translateX(10%); } }
 @keyframes pillIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes floatParticle { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-4vh) translateX(1vw); } }
+@keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.75; } }
