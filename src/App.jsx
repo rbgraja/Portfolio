@@ -79,21 +79,39 @@ const CV_URL =
 
 const SCENE_DURATION = 4200;
 const MANUAL_VIEW_DURATION = 10000;
+const LOADER_DURATION = 1500;
+const LOADER_FADE = 900;
 
 export default function App() {
   const [current, setCurrent] = useState(0);
-  const sceneCount = 7;
+  const sceneCount = 8;
   const timerRef = useRef(null);
   const manualRef = useRef(false);
 
+  const [loading, setLoading] = useState(true);
+  const [loaderMounted, setLoaderMounted] = useState(true);
+
   useEffect(() => {
+    const hideTimer = setTimeout(() => setLoading(false), LOADER_DURATION);
+    const unmountTimer = setTimeout(
+      () => setLoaderMounted(false),
+      LOADER_DURATION + LOADER_FADE
+    );
+    return () => {
+      clearTimeout(hideTimer);
+      clearTimeout(unmountTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
     const duration = manualRef.current ? MANUAL_VIEW_DURATION : SCENE_DURATION;
     manualRef.current = false;
     timerRef.current = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % sceneCount);
     }, duration);
     return () => clearTimeout(timerRef.current);
-  }, [current]);
+  }, [current, loading]);
 
   const goToSlide = (i) => {
     manualRef.current = true;
@@ -102,6 +120,36 @@ export default function App() {
 
   return (
     <div className="relative w-full h-screen min-h-screen overflow-hidden font-['Inter'] bg-[radial-gradient(ellipse_at_50%_25%,#171a1f_0%,#0c0d10_50%,#050506_100%)]">
+      {loaderMounted && (
+        <div
+          className={`fixed inset-0 z-[50] flex items-center justify-center bg-[radial-gradient(ellipse_at_50%_25%,#171a1f_0%,#0c0d10_50%,#050506_100%)] transition-all duration-[900ms] ease-in-out ${
+            loading
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-[1.03] pointer-events-none"
+          }`}
+        >
+          <div className="text-center px-6">
+            <div className="font-['Space_Grotesk'] font-bold text-[clamp(20px,3.2vw,30px)] text-[#f3efe7] tracking-tight leading-snug">
+              Everything you need to know
+            </div>
+            <div className="font-['Inter'] font-medium text-[clamp(14px,1.8vw,18px)] text-[#e8b563] mt-2 tracking-wide">
+              — in the next 30 seconds.
+            </div>
+            <div className="w-[160px] h-[2px] mx-auto mt-8 rounded-full bg-white/10 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-[#e8b563]"
+                style={{
+                  animation: `loaderFill ${LOADER_DURATION}ms linear forwards`,
+                }}
+              />
+            </div>
+            <div className="font-['Inter'] text-[11px] tracking-[0.3em] uppercase text-white/40 mt-3">
+              Loading
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* smoke layer */}
       <div className="absolute -inset-[10%] blur-[55px] opacity-95">
         <div className="absolute rounded-full mix-blend-screen w-[62vw] h-[62vw] -left-[18vw] -top-[14vw] bg-[radial-gradient(circle,rgba(110,122,145,0.4),rgba(110,122,145,0)_70%)] animate-[drift1_24s_ease-in-out_infinite]" />
@@ -292,6 +340,22 @@ export default function App() {
         </Scene>
 
         <Scene active={current === 6}>
+          <div className="font-['Inter'] font-medium text-[15px] tracking-[0.35em] uppercase text-[#e8b563] mb-6 opacity-90">
+            What drives me
+          </div>
+          <div className="font-['Space_Grotesk'] font-bold text-[clamp(28px,4.5vw,52px)] leading-[1.08] text-[#f3efe7] tracking-tight max-w-[18ch]">
+            Eager for challenges,
+            <br />
+            built for teams
+          </div>
+          <div className="font-['Inter'] text-[clamp(15px,1.7vw,20px)] text-[#c7cbd3] max-w-[44ch] leading-[1.75] mt-4">
+            I thrive on solving hard problems and enjoy growing alongside a
+            team — sharing knowledge, learning fast, and pushing the work
+            forward together.
+          </div>
+        </Scene>
+
+        <Scene active={current === 7}>
           <div className="font-['Inter'] font-medium text-[15px] tracking-[0.35em] uppercase text-[#e8b563] mb-6 opacity-90">
             Let's build something
           </div>

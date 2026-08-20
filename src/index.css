@@ -40,3 +40,4 @@
 @keyframes pillIn { to { opacity: 1; transform: translateY(0); } }
 @keyframes floatParticle { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-4vh) translateX(1vw); } }
 @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.75; } }
+@keyframes loaderFill { from { width: 0%; } to { width: 100%; } }
