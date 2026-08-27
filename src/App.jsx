@@ -29,9 +29,9 @@ const PROJECTS = [
     url: "https://rabbit-dja4.vercel.app/",
   },
   {
-   name:"Resure",
-   description: "E-commerce / Gym & Fitness app",
-   url: "https://e-store-gym.vercel.app/",
+   name:"Resurgence",
+   description: "Gym & Fitness website — Resurgence Athletics",
+   url: "https://www.resurgence-athletics.com.au/",
   },
   {
     name: "XTech",
@@ -42,7 +42,12 @@ const PROJECTS = [
     name: "CMS",
     description: "DEMO CMS",
     url: "https://cms-for-demo.vercel.app/",
-  }
+  },
+  {
+    name: "Email Agent",
+    description: "AI lead generator & auto-campaign runner",
+    url: "https://rajaemailagent.vercel.app",
+  },
 ];
 
 const EXPERIENCE = [
