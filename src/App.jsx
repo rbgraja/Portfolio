@@ -23,11 +23,14 @@ const PROJECTS = [
     description: "Notes & lectures sharing platform",
     url: "https://www.freesekho.com/",
   },
-  {
-    name: "Rabbit",
-    description: "E-commerce / store app",
-    url: "https://rabbit-dja4.vercel.app/",
+
+    {
+    name: "Email Agent",
+    description: "AI lead generator & auto-campaign runner",
+    url: "https://rajaemailagent.vercel.app",
   },
+
+
   {
    name:"Resurgence",
    description: "Gym & Fitness website — Resurgence Athletics",
@@ -38,16 +41,18 @@ const PROJECTS = [
     description: "E-commerce / store app",
     url: "https://xtech-ecommerse.vercel.app/",
   },
+
+    {
+    name: "Rabbit",
+    description: "E-commerce / store app",
+    url: "https://rabbit-dja4.vercel.app/",
+  },
   {
     name: "CMS",
     description: "DEMO CMS",
     url: "https://cms-for-demo.vercel.app/",
   },
-  {
-    name: "Email Agent",
-    description: "AI lead generator & auto-campaign runner",
-    url: "https://rajaemailagent.vercel.app",
-  },
+
 ];
 
 const EXPERIENCE = [
@@ -84,6 +89,8 @@ const CV_URL =
 
 const SCENE_DURATION = 4200;
 const MANUAL_VIEW_DURATION = 10000;
+const PROJECT_SLIDE_DURATION = 10000;
+const PROJECTS_SCENE_INDEX = 5;
 const LOADER_DURATION = 1500;
 const LOADER_FADE = 900;
 
@@ -95,6 +102,9 @@ export default function App() {
 
   const [loading, setLoading] = useState(true);
   const [loaderMounted, setLoaderMounted] = useState(true);
+
+  const [projectIndex, setProjectIndex] = useState(0);
+  const projectTimerRef = useRef(null);
 
   useEffect(() => {
     const hideTimer = setTimeout(() => setLoading(false), LOADER_DURATION);
@@ -108,8 +118,10 @@ export default function App() {
     };
   }, []);
 
+  // main scene timer — paused on the Projects scene, which advances itself
+  // once every project has had its turn (see the effect below)
   useEffect(() => {
-    if (loading) return;
+    if (loading || current === PROJECTS_SCENE_INDEX) return;
     const duration = manualRef.current ? MANUAL_VIEW_DURATION : SCENE_DURATION;
     manualRef.current = false;
     timerRef.current = setTimeout(() => {
@@ -118,8 +130,25 @@ export default function App() {
     return () => clearTimeout(timerRef.current);
   }, [current, loading]);
 
+  // projects sub-slider — one project every 10s, then hands control back
+  // to the main timer
+  useEffect(() => {
+    if (loading || current !== PROJECTS_SCENE_INDEX) return;
+    manualRef.current = false;
+    projectTimerRef.current = setTimeout(() => {
+      if (projectIndex >= PROJECTS.length - 1) {
+        setProjectIndex(0);
+        setCurrent((prev) => (prev + 1) % sceneCount);
+      } else {
+        setProjectIndex(projectIndex + 1);
+      }
+    }, PROJECT_SLIDE_DURATION);
+    return () => clearTimeout(projectTimerRef.current);
+  }, [current, projectIndex, loading]);
+
   const goToSlide = (i) => {
     manualRef.current = true;
+    if (i === PROJECTS_SCENE_INDEX) setProjectIndex(0);
     setCurrent(i);
   };
 
@@ -321,25 +350,41 @@ export default function App() {
           <div className="font-['Inter'] font-medium text-[15px] tracking-[0.35em] uppercase text-[#e8b563] mb-6 opacity-90">
             Projects
           </div>
-          <div className="font-['Space_Grotesk'] font-bold text-[clamp(26px,4vw,44px)] leading-[1.05] text-[#f3efe7] tracking-tight">
-            Things I've shipped
-          </div>
-          <div className="flex flex-wrap justify-center gap-4 max-w-[640px] mt-9">
-            {PROJECTS.map((project) => (
+
+          {PROJECTS.filter((_, i) => i === projectIndex).map((project) => (
+            <div
+              key={project.name}
+              className="flex flex-col items-center opacity-0 translate-y-2 animate-[pillIn_0.6s_ease_forwards]"
+            >
+              <ProjectPreview project={project} />
+
+              <div className="font-['Space_Grotesk'] font-bold text-[clamp(24px,3.6vw,40px)] leading-[1.1] text-[#f3efe7] tracking-tight mt-7">
+                {project.name}
+              </div>
+              <div className="font-['Inter'] text-[clamp(14px,1.6vw,18px)] text-[#c7cbd3] max-w-[46ch] leading-[1.7] mt-2.5">
+                {project.description}
+              </div>
               <a
-                key={project.name}
-                className="flex flex-col items-start gap-1.5 min-w-[220px] text-left no-underline border border-[#e8b5634d] bg-white/[0.03] rounded-[14px] px-5 py-4 transition-all duration-300 hover:border-[#e8b563b3] hover:bg-white/[0.06] hover:-translate-y-1"
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-['Inter'] font-medium text-[13px] text-[#0c0d10] bg-[#e8b563] px-5 py-2.5 rounded-full no-underline mt-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(232,181,99,0.35)]"
               >
-                <span className="font-['Space_Grotesk'] font-medium text-[17px] text-[#f3efe7]">
-                  {project.name}
-                </span>
-                <span className="font-['Inter'] text-[13px] text-[#b9bec7]">
-                  {project.description}
-                </span>
+                Visit site ↗
               </a>
+            </div>
+          ))}
+
+          <div className="flex justify-center gap-2 mt-8">
+            {PROJECTS.map((project, i) => (
+              <button
+                key={project.name}
+                className={`h-1 rounded-full border-none p-0 cursor-pointer transition-all duration-300 ${
+                  i === projectIndex ? "w-6 bg-[#e8b563]" : "w-3 bg-white/[0.18]"
+                }`}
+                onClick={() => setProjectIndex(i)}
+                aria-label={`Show project ${project.name}`}
+              />
             ))}
           </div>
         </Scene>
@@ -385,6 +430,51 @@ export default function App() {
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
+      </div>
+    </div>
+  );
+}
+
+const PREVIEW_BASE_W = 1280;
+const PREVIEW_BASE_H = 800;
+
+function ProjectPreview({ project }) {
+  const host = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  return (
+    <div className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[560px] rounded-[14px] overflow-hidden border border-white/10 bg-[#111318] shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] border-b border-white/10">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+        <div className="flex-1 mx-3 px-3 py-1 rounded-full bg-white/[0.06] text-[11px] text-white/50 truncate text-left">
+          {host}
+        </div>
+      </div>
+      <div className="relative aspect-[16/10] bg-[#0c0d10] overflow-hidden">
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.name}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+        ) : (
+          // Renders the site at a fixed desktop width, then scales the whole
+          // thing down to fit the card — otherwise a narrow mobile-width
+          // iframe just shows a tiny, zoomed-in crop of the page.
+          <div
+            className="absolute top-0 left-0 origin-top-left scale-[0.21875] sm:scale-[0.296875] md:scale-[0.375] lg:scale-[0.4375]"
+            style={{ width: PREVIEW_BASE_W, height: PREVIEW_BASE_H }}
+          >
+            <iframe
+              src={project.url}
+              title={project.name}
+              loading="lazy"
+              style={{ width: PREVIEW_BASE_W, height: PREVIEW_BASE_H, border: 0 }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
