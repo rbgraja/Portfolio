@@ -27,6 +27,7 @@ const PROJECTS = [
     name: "XTech",
     description: "E-commerce / store app",
     url: "https://www.xtech.net.au",
+    noEmbed: true,
   },
   {
     name: "Email Agent",
@@ -450,7 +451,19 @@ function ProjectPreview({ project }) {
         </div>
       </div>
       <div className="relative aspect-[16/10] bg-[#0c0d10] overflow-hidden">
-        {project.image ? (
+        {project.noEmbed ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center">
+            <div className="text-2xl">🔒</div>
+            <div className="font-['Space_Grotesk'] font-semibold text-[13px] sm:text-[15px] text-[#f3efe7]">
+              Preview unavailable
+            </div>
+            <p className="text-[10px] sm:text-[12px] leading-relaxed text-white/50 max-w-[34ch]">
+              For security reasons, this website doesn't allow itself to be
+              embedded in an iframe. Use the button below to visit the live
+              site.
+            </p>
+          </div>
+        ) : project.image ? (
           <img
             src={project.image}
             alt={project.name}
