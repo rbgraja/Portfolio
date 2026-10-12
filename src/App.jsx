@@ -26,7 +26,7 @@ const PROJECTS = [
  {
     name: "XTech",
     description: "E-commerce / store app",
-    url: "https://www.xtech.net.au/",
+    url: "https://www.xtech.net.au",
   },
   {
     name: "Email Agent",
