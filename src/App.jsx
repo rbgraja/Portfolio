@@ -18,31 +18,29 @@ const SKILLS = [
 ];
 
 const PROJECTS = [
+    {
+   name:"Resurgence",
+   description: "Gym & Fitness website — Resurgence Athletics",
+   url: "https://www.resurgence-athletics.com.au/",
+  },
+ {
+    name: "XTech",
+    description: "E-commerce / store app",
+    url: "https://www.xtech.net.au/",
+  },
+  {
+    name: "Email Agent",
+    description: "AI lead generator & auto-campaign runner",
+    url: "https://rajaemailagent.vercel.app",
+  },
+
   {
     name: "FreeSekho",
     description: "Notes & lectures sharing platform",
     url: "https://www.freesekho.com/",
   },
 
-    {
-    name: "Email Agent",
-    description: "AI lead generator & auto-campaign runner",
-    url: "https://rajaemailagent.vercel.app",
-  },
-
-
-  {
-   name:"Resurgence",
-   description: "Gym & Fitness website — Resurgence Athletics",
-   url: "https://www.resurgence-athletics.com.au/",
-  },
-  {
-    name: "XTech",
-    description: "E-commerce / store app",
-    url: "https://xtech-ecommerse.vercel.app/",
-  },
-
-    {
+   {
     name: "Rabbit",
     description: "E-commerce / store app",
     url: "https://rabbit-dja4.vercel.app/",
